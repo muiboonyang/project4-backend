@@ -1,4 +1,4 @@
-# Community App
+# Fitness Class Booking App
 Made for SEI33 - Project 4
 
 <h2>Introduction</h2>
