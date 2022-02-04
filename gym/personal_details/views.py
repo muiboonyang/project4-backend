@@ -11,8 +11,8 @@ class PersonalDetailsAll(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
-        reviews = PersonalDetails.objects.all()
-        serializer = PersonalDetailsSerializer(reviews, many=True)
+        personal_details = PersonalDetails.objects.all()
+        serializer = PersonalDetailsSerializer(personal_details, many=True)
 
         return Response(serializer.data)
 
@@ -21,15 +21,13 @@ class PersonalDetailsOne(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request, pk):
-        tasks = PersonalDetails.objects.get(id=pk)
-        serializer = PersonalDetailsSerializer(tasks, many=False)
+        personal_details = PersonalDetails.objects.get(id=pk)
+        serializer = PersonalDetailsSerializer(personal_details, many=False)
 
         return Response(serializer.data)
 
 
 class PersonalDetailsCreate(APIView):
-    permission_classes = (IsAuthenticated,)
-
     def post(self, request):
         serializer = PersonalDetailsSerializer(data=request.data)
 
@@ -40,7 +38,7 @@ class PersonalDetailsCreate(APIView):
             return Response(serializer.data)
 
         else:
-            return Response('Error with creating review')
+            return Response('Error with creating personal details')
 
 
 class PersonalDetailsUpdate(APIView):
@@ -63,4 +61,4 @@ class PersonalDetailsDelete(APIView):
         personal_details = PersonalDetails.objects.get(id=pk)
         personal_details.delete()
 
-        return Response('Review deleted')
+        return Response('Personal details deleted')

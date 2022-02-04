@@ -21,8 +21,8 @@ class ReviewDetail(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request, pk):
-        tasks = Review.objects.get(id=pk)
-        serializer = ReviewSerializer(tasks, many=False)
+        reviews = Review.objects.get(id=pk)
+        serializer = ReviewSerializer(reviews, many=False)
 
         return Response(serializer.data)
 

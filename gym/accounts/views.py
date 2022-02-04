@@ -4,13 +4,16 @@ from rest_framework import permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import AccountSerializer
+from rest_framework.permissions import IsAuthenticated
+from .models import Account
+from rest_framework import status
 
 # JWT settings
 from rest_framework_simplejwt.tokens import RefreshToken
 
 
-# Putting info in payload: username, token, shows in API
-# Serializer class
+# 1) Login new user
+# Insert info in payload: username, token, that shows in API call
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
     @classmethod
@@ -26,7 +29,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
 
 
-# Create new user
+# 2) Create new user
 class CreateUser(APIView):
     permission_classes = (permissions.AllowAny,)
 
@@ -38,3 +41,50 @@ class CreateUser(APIView):
 
         else:
             return Response('Error with creating user')
+
+
+# 3) Update existing user
+class UpdateUser(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request, pk):
+        account_details = Account.objects.get(id=pk)
+        serializer = AccountSerializer(instance=account_details, data=request.data, partial=True)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+
+
+# 4) Get all users
+class GetUserAll(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        account_details = Account.objects.all()
+        serializer = AccountSerializer(account_details, many=True)
+
+        return Response(serializer.data)
+
+# 5) Get one user
+class GetUserOne(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request, pk):
+        account_details = Account.objects.get(id=pk)
+        serializer = AccountSerializer(account_details, many=False)
+
+        return Response(serializer.data)
+
+# 6) Logout user
+
+class LogoutAndBlacklist(APIView):
+    def post(self, request):
+        refresh_token = request.data["refresh"]
+        token = RefreshToken(refresh_token)
+        token.blacklist()
+
+        return Response("Logout + token blacklist successful!")
+
+
+

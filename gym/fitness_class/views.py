@@ -11,8 +11,8 @@ class ClassList(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
-        reviews = FitnessClass.objects.all()
-        serializer = FitnessClassSerializer(reviews, many=True)
+        fitness_classes = FitnessClass.objects.all()
+        serializer = FitnessClassSerializer(fitness_classes, many=True)
 
         return Response(serializer.data)
 
@@ -21,8 +21,8 @@ class ClassDetail(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request, pk):
-        tasks = FitnessClass.objects.get(id=pk)
-        serializer = FitnessClassSerializer(tasks, many=False)
+        fitness_classes = FitnessClass.objects.get(id=pk)
+        serializer = FitnessClassSerializer(fitness_classes, many=False)
 
         return Response(serializer.data)
 

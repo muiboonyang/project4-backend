@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'rest_framework_simplejwt.token_blacklist',
     'accounts',
     'corsheaders',
     'review',
@@ -158,7 +159,7 @@ SIMPLE_JWT = {
     'UPDATE_LAST_LOGIN': False,
 
     'ALGORITHM': 'HS256',
-    'SIGNING_KEY': SECRET_KEY,
+    'SIGNING_KEY': os.environ['SIGNING_KEY'],
     'VERIFYING_KEY': None,
     'AUDIENCE': None,
     'ISSUER': None,

@@ -1,4 +1,4 @@
-# make email input field CASE-INSENSITIVE
+# Makes email input field CASE-INSENSITIVE
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend

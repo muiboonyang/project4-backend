@@ -5,8 +5,7 @@ from .models import PersonalDetails
 # Register your models here.
 class PersonalDetailsAdmin(admin.ModelAdmin):
     list_display = (
-        'user', 'contact', 'date_of_birth', 'gender', 'address_line', 'unit', 'postal_code',
-        'emergency_contact', 'emergency_number')
+        'user', 'contact', 'date_of_birth', 'gender', 'address_line', 'unit', 'postal_code')
 
     ordering = ('user',)
 
@@ -18,7 +17,7 @@ class PersonalDetailsAdmin(admin.ModelAdmin):
         (
             None,
             {'fields': ('user', 'contact', 'date_of_birth', 'gender', 'address_line', 'unit', 'postal_code',
-                        'emergency_contact', 'emergency_number')}),
+                       )}),
     )
 
     # Form fields when you create new account
