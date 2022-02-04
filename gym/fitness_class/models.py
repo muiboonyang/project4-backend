@@ -4,7 +4,7 @@ from django.db import models
 # Create your models here.
 
 class FitnessClass(models.Model):
-    id = models.AutoField(primary_key=True)
+
     CLASS_CHOICES = [
         ('DM', 'Dominate'),
         ('KO', 'Kore'),

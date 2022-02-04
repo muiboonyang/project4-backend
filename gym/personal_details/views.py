@@ -20,8 +20,8 @@ class PersonalDetailsAll(APIView):
 class PersonalDetailsOne(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def get(self, request, pk):
-        personal_details = PersonalDetails.objects.get(id=pk)
+    def get(self, request, fk):
+        personal_details = PersonalDetails.objects.get(user_id=fk)
         serializer = PersonalDetailsSerializer(personal_details, many=False)
 
         return Response(serializer.data)
@@ -44,8 +44,8 @@ class PersonalDetailsCreate(APIView):
 class PersonalDetailsUpdate(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def post(self, request, pk):
-        personal_details = PersonalDetails.objects.get(id=pk)
+    def post(self, request, fk):
+        personal_details = PersonalDetails.objects.get(user_id=fk)
         serializer = PersonalDetailsSerializer(instance=personal_details, data=request.data, partial=True)
 
         if serializer.is_valid():
@@ -57,8 +57,8 @@ class PersonalDetailsUpdate(APIView):
 class PersonalDetailsDelete(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def delete(self, request, pk):
-        personal_details = PersonalDetails.objects.get(id=pk)
+    def delete(self, request, fk):
+        personal_details = PersonalDetails.objects.get(user_id=fk)
         personal_details.delete()
 
         return Response('Personal details deleted')
