@@ -15,6 +15,7 @@ class Review(models.Model):
     description = models.TextField()
     date = models.DateField(default=datetime.date.today)
     user = models.ForeignKey(User, default=User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=20)
 
     def _str_(self):
         return self.user
