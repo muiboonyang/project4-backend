@@ -20,8 +20,8 @@ class ReviewList(APIView):
 class ReviewDetail(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def get(self, request, pk):
-        reviews = Review.objects.get(id=pk)
+    def get(self, request, fk):
+        reviews = Review.objects.get(user_id=fk)
         serializer = ReviewSerializer(reviews, many=False)
 
         return Response(serializer.data)
@@ -46,8 +46,8 @@ class ReviewCreate(APIView):
 class ReviewUpdate(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def post(self, request, pk):
-        review = Review.objects.get(id=pk)
+    def post(self, request, fk):
+        review = Review.objects.get(user_id=fk)
         serializer = ReviewSerializer(instance=review, data=request.data, partial=True)
 
         if serializer.is_valid():
@@ -59,8 +59,8 @@ class ReviewUpdate(APIView):
 class ReviewDelete(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def delete(self, request, pk):
-        review = Review.objects.get(id=pk)
+    def delete(self, request, fk):
+        review = Review.objects.get(user_id=fk)
         review.delete()
 
         return Response('Review deleted')
