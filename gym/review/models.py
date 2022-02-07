@@ -10,7 +10,6 @@ User = settings.AUTH_USER_MODEL
 
 class Review(models.Model):
 
-    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=120)
     description = models.TextField()
     date = models.DateField(default=datetime.date.today)

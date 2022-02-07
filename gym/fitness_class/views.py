@@ -20,9 +20,9 @@ class ClassList(APIView):
 class ClassDetail(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def get(self, request, pk):
-        fitness_classes = FitnessClass.objects.get(id=pk)
-        serializer = FitnessClassSerializer(fitness_classes, many=False)
+    def get(self, request, fk):
+        fitness_classes = FitnessClass.objects.filter(user_id=fk)
+        serializer = FitnessClassSerializer(fitness_classes, many=True)
 
         return Response(serializer.data)
 
@@ -40,7 +40,7 @@ class ClassCreate(APIView):
             return Response(serializer.data)
 
         else:
-            return Response('Error with editing class')
+            return Response('Error with creating class')
 
 
 class ClassUpdate(APIView):
@@ -63,4 +63,4 @@ class ClassDelete(APIView):
         class_details = FitnessClass.objects.get(id=pk)
         class_details.delete()
 
-        return Response('Class deleted')
+        return Response('Unenrolled from class')

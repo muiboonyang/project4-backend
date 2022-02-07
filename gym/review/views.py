@@ -59,8 +59,8 @@ class ReviewUpdate(APIView):
 class ReviewDelete(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def delete(self, request, fk):
-        review = Review.objects.get(user_id=fk)
+    def delete(self, request, pk):
+        review = Review.objects.get(id=pk)
         review.delete()
 
         return Response('Review deleted')
