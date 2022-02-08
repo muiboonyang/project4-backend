@@ -3,7 +3,7 @@ from .models import Transactions
 
 
 class TransactionsAdmin(admin.ModelAdmin):
-    list_display = ('classesPurchased', 'classesUsed', 'date', 'time', 'user', 'name')
+    list_display = ('classCredit', 'classDebit', 'date', 'time', 'user', 'name', 'transaction_type')
 
 
 # Register your models here.

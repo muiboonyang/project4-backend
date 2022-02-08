@@ -10,16 +10,17 @@ User = settings.AUTH_USER_MODEL
 
 class Transactions(models.Model):
 
-    classesPurchased = models.IntegerField(default=0)
-    classesUsed = models.IntegerField(default=0)
+    classCredit = models.IntegerField(default=0)
+    classDebit = models.IntegerField(default=0)
+    transaction_type = models.CharField(max_length=20, default="")
     date = models.DateField(default=datetime.date.today)
-    time = models.TimeField(default="")
+    time = models.TimeField(auto_now_add=True)
     user = models.ForeignKey(User, default=User, on_delete=models.CASCADE)
     name = models.CharField(max_length=20)
 
     @property
     def balance(self):
-        return self.classesPurchased - self.classesUsed
+        return self.classCredit - self.classDebit
 
     def _str_(self):
         return self.user
