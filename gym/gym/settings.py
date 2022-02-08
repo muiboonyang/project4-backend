@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'review',
     'fitness_class',
     'personal_details',
+    'transactions',
 
 ]
 
