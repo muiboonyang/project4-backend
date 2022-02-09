@@ -9,9 +9,9 @@ class FitnessClass(models.Model):
     user = models.ForeignKey(User, default=User, on_delete=models.CASCADE)
     class_type = models.CharField(max_length=30, default="")
     class_instructor = models.CharField(max_length=30, default="")
-    date = models.DateField(default="")
-    time = models.TimeField(default="")
-    spot = models.CharField(max_length=30, default="")
+    date = models.CharField(max_length=20, default="")
+    time = models.CharField(max_length=20, default="")
+    spot = models.IntegerField(default="")
     name = models.CharField(max_length=20, default="")
 
     def _str_(self):
