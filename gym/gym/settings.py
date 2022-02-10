@@ -14,6 +14,7 @@ from datetime import timedelta
 from pathlib import Path
 import os
 from dotenv import load_dotenv, find_dotenv
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -181,6 +182,13 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
+# CORS_ORIGIN_WHITELIST = [
+#     'http://localhost:3000'
+# ]
+
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000'
+    'https://anywhere-fitness-first.netlify.app/'
 ]
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
