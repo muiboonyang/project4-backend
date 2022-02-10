@@ -21,7 +21,7 @@ class ClassDetail(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request, fk):
-        fitness_classes = FitnessClass.objects.filter(user_id=fk)
+        fitness_classes = FitnessClass.objects.filter(user_id=fk).order_by('date', 'time')
         serializer = FitnessClassSerializer(fitness_classes, many=True)
 
         return Response(serializer.data)

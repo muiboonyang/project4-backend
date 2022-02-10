@@ -11,7 +11,7 @@ class ReviewList(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
-        reviews = Review.objects.all()
+        reviews = Review.objects.all().order_by('date', 'time')
         serializer = ReviewSerializer(reviews, many=True)
 
         return Response(serializer.data)

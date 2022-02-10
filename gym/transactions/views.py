@@ -21,7 +21,7 @@ class TransactionDetail(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request, fk):
-        transaction = Transactions.objects.filter(user_id=fk)
+        transaction = Transactions.objects.filter(user_id=fk).order_by('date', 'time')
         serializer = TransactionsSerializer(transaction, many=True)
 
         return Response(serializer.data)

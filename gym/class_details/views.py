@@ -11,7 +11,7 @@ class ClassLayoutList(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
-        class_details = ClassDetails.objects.all()
+        class_details = ClassDetails.objects.all().order_by('date', 'time')
         serializer = ClassDetailsSerializer(class_details, many=True)
 
         return Response(serializer.data)
