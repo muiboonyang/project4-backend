@@ -31,5 +31,6 @@ class ClassDetails(models.Model):
     spot_twenty_booked = models.BooleanField(default=False)
 
 
+
     def _str_(self):
         return self.class_type

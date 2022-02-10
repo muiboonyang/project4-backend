@@ -63,6 +63,26 @@ class ClassLayoutUpdate(APIView):
             return Response(serializer.data)
 
 
+class ClassLayoutRefund(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request, pk):
+        class_details = ClassDetails.objects.get(id=pk)
+
+        # find the column to update
+        spot_number = request.data['button_id']  # request.data = button_id: one
+
+        # set spot_{spot_number}_booked: True
+        newdict = {f"spot_{spot_number}_booked": "false"}
+
+        serializer = ClassDetailsSerializer(instance=class_details, data=newdict, partial=True)
+
+        if serializer.is_valid():
+            serializer.save()
+
+            return Response(serializer.data)
+
+
 class ClassLayoutDelete(APIView):
     permission_classes = (IsAuthenticated,)
 

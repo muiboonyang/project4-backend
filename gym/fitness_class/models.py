@@ -12,7 +12,9 @@ class FitnessClass(models.Model):
     date = models.CharField(max_length=20, default="")
     time = models.CharField(max_length=20, default="")
     spot = models.IntegerField(default="")
+    spot_name = models.CharField(max_length=20, default="")
     name = models.CharField(max_length=20, default="")
+    class_id = models.IntegerField(default="")
 
     def _str_(self):
         return self.class_type
