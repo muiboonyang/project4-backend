@@ -194,9 +194,11 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
-CORS_ORIGIN_WHITELIST = [
-    'https://anywhere-fitness-first.netlify.app/', 'http://localhost:3000'
-]
+# CORS_ORIGIN_WHITELIST = [
+#     'https://anywhere-fitness-first.netlify.app/', 'http://localhost:3000'
+# ]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Configurations for static files
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
