@@ -21,8 +21,8 @@ class ClassLayoutDetail(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request, pk):
-        reviews = ClassDetails.objects.get(id=pk)
-        serializer = ClassDetailsSerializer(reviews, many=False)
+        class_details = ClassDetails.objects.get(id=pk)
+        serializer = ClassDetailsSerializer(class_details, many=False)
 
         return Response(serializer.data)
 
@@ -48,7 +48,14 @@ class ClassLayoutUpdate(APIView):
 
     def post(self, request, pk):
         class_details = ClassDetails.objects.get(id=pk)
-        serializer = ClassDetailsSerializer(instance=class_details, data=request.data, partial=True)
+
+        # find the column to update
+        spot_number = request.data['button_id']  # request.data = button_id: one
+
+        # set spot_{spot_number}_booked: True
+        newdict = {f"spot_{spot_number}_booked": "true"}
+
+        serializer = ClassDetailsSerializer(instance=class_details, data=newdict, partial=True)
 
         if serializer.is_valid():
             serializer.save()
