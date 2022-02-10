@@ -11,8 +11,8 @@ class ClassLayoutList(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
-        reviews = ClassDetails.objects.all()
-        serializer = ClassDetailsSerializer(reviews, many=True)
+        class_details = ClassDetails.objects.all()
+        serializer = ClassDetailsSerializer(class_details, many=True)
 
         return Response(serializer.data)
 
@@ -46,9 +46,9 @@ class ClassLayoutCreate(APIView):
 class ClassLayoutUpdate(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def post(self, request, fk):
-        review = ClassDetails.objects.get(user_id=fk)
-        serializer = ClassDetailsSerializer(instance=review, data=request.data, partial=True)
+    def post(self, request, pk):
+        class_details = ClassDetails.objects.get(id=pk)
+        serializer = ClassDetailsSerializer(instance=class_details, data=request.data, partial=True)
 
         if serializer.is_valid():
             serializer.save()
@@ -60,7 +60,7 @@ class ClassLayoutDelete(APIView):
     permission_classes = (IsAuthenticated,)
 
     def delete(self, request, pk):
-        review = ClassDetails.objects.get(id=pk)
-        review.delete()
+        class_details = ClassDetails.objects.get(id=pk)
+        class_details.delete()
 
         return Response('Class layout deleted')
