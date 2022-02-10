@@ -195,12 +195,8 @@ SIMPLE_JWT = {
 }
 
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000'
+    'https://anywhere-fitness-first.netlify.app/', 'http://localhost:3000'
 ]
-
-# CORS_ORIGIN_WHITELIST = [
-#     'https://anywhere-fitness-first.netlify.app/'
-# ]
 
 # Configurations for static files
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
