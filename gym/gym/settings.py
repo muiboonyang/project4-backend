@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import dj_database_url
 from datetime import timedelta
 from pathlib import Path
 import os
@@ -33,7 +34,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['anywhere-fitness-first.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['anywhere-fitness-first.herokuapp.com', '127.0.0.1', '0.0.0.0', 'localhost']
 
 AUTH_USER_MODEL = 'accounts.Account'
 AUTHENTICATION_BACKENDS = (
@@ -113,7 +114,7 @@ DATABASES = {
 }
 
 # Heroku: Update database configuration from $DATABASE_URL.
-import dj_database_url
+
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
