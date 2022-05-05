@@ -198,7 +198,7 @@ SIMPLE_JWT = {
 #     'https://anywhere-fitness-first.netlify.app/', 'http://localhost:3000'
 # ]
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Configurations for static files
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
